@@ -1,7 +1,7 @@
-// A command-line quiz program.
+// main.c - The entry point for the survey program.
 
 #include <stdio.h>
-#include "quiz.h"
+#include "survey.h"
 
 int main(void) 
 {
