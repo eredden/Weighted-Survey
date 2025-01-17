@@ -6,6 +6,7 @@ project(main VERSION 1.0)
 
 add_executable(main 
     src/main.c
+    src/csv.c
     src/survey.c
 )
 target_include_directories(main PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)

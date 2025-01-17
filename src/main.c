@@ -1,6 +1,7 @@
 // main.c - The entry point for the survey program.
 
 #include <stdio.h>
+#include "csv.h"
 #include "survey.h"
 
 int main(void) {
@@ -29,4 +30,5 @@ int main(void) {
     };
 
     ask_question(question);
+    read_csv();
 }
