@@ -1,4 +1,4 @@
-// quiz.h - Defines questions, answers, and functions for working with them.
+// survey.h - Defines questions, answers, and functions for working with them.
 
 #ifndef SURVEY_H
 #define SURVEY_H
