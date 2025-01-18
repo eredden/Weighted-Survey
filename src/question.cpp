@@ -1,6 +1,7 @@
 // question.cpp - Functions for the Question class.
 
 #include <iostream>
+#include <limits>
 #include <string>
 #include "survey.hpp"
 
@@ -56,10 +57,18 @@ Answer Question::ask(){
     std::cout << "3. " << _answers[2].getText() << "\n";
     std::cout << "4. " << _answers[3].getText() << "\n\n";
 
-    while(index > 4 || 1 > index) {
+    std::cout << "Enter an answer (1-4): ";
+
+    // Validate that the answer is between 1 and 4.
+    while(!(std::cin >> index) || index > 4 || 1 > index) {
         std::cout << "Enter an answer (1-4): ";
-        std::cin >> index; // TODO: Validate input prior to checking it.
+
+        // Ignore invalid inputs to prevent catastrophic failure.
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     };
+
+    std::cout << "You selected answer " << index << ".\n\n";
 
     return _answers[index - 1];
 };
