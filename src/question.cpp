@@ -48,7 +48,7 @@ Answer *Question::getAnswers(){
 };
 
 // Prompts the end user with the question.
-Answer Question::ask(){
+Answer *Question::ask(){
     unsigned int index = -1;
 
     std::cout << "QUESTION: " << _prompt << "\n\n";
@@ -59,7 +59,7 @@ Answer Question::ask(){
 
     std::cout << "Enter an answer (1-4): ";
 
-    // Validate that the answer is between 1 and 4.
+    // Validate that the answer is not blank, and that it is between 1 and 4.
     while(!(std::cin >> index) || index > 4 || 1 > index) {
         std::cout << "Enter an answer (1-4): ";
 
@@ -70,5 +70,7 @@ Answer Question::ask(){
 
     std::cout << "You selected answer " << index << ".\n\n";
 
-    return _answers[index - 1];
+    // Returning this answer by value would cause weight values to
+    // only be modified by the copy of the original Answer instance.
+    return &_answers[index - 1];
 };
