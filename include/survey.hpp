@@ -6,14 +6,16 @@
 #ifndef SURVEY_H
 #define SURVEY_H
 
+// Note that TOTAL_QUESTIONS excludes the last question about political affiliation.
+#define TOTAL_QUESTIONS  3
 #define MAX_ANSWER_COUNT 4
 #define MAX_WEIGHT_COUNT 4
 
 enum Party : unsigned int {
-    Democratic,
-    Green,
-    Libertarian,
-    Republican
+    Blues,
+    Greens,
+    Yellows,
+    Reds
 };
 
 class Answer {
@@ -43,7 +45,7 @@ class Question {
         void setAnswers(Answer newAnswers[4]);
         Answer *getAnswers();
 
-        Answer ask();
+        Answer *ask();
 
     private:
         std::string _prompt;
