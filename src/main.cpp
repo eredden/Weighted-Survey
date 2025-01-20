@@ -69,7 +69,7 @@ int main(void) {
         cumulative_weight += selected_weights[index];
     }
 
-    std::cout << "PREDICTION: Here are your chances of being in each political party:" << std::endl;
+    std::cout << "PREDICTION: Here are your chances of being in each political party:\n"      << std::endl;
     std::cout << "Blue Party: "   << (selected_weights[0] / cumulative_weight) * 100 << "%  " << std::endl;
     std::cout << "Green Party: "  << (selected_weights[1] / cumulative_weight) * 100 << "%  " << std::endl;
     std::cout << "Yellow Party: " << (selected_weights[2] / cumulative_weight) * 100 << "%  " << std::endl;
