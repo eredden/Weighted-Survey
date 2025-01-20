@@ -7,14 +7,14 @@
 #define SURVEY_H
 
 // Note that TOTAL_QUESTIONS excludes the last question about political affiliation.
-#define TOTAL_QUESTIONS  3
-#define MAX_ANSWER_COUNT 4
-#define MAX_WEIGHT_COUNT 4
+#define TOTAL_QUESTIONS 3
+#define TOTAL_ANSWERS   4
+#define TOTAL_WEIGHTS   4
 
 class Answer {
     public:
         Answer();
-        Answer(std::string text, unsigned int weights[MAX_ANSWER_COUNT]);
+        Answer(std::string text, unsigned int weights[TOTAL_ANSWERS]);
 
         void setText(std::string newText);
         std::string getText();
@@ -22,7 +22,7 @@ class Answer {
         void setWeight(unsigned int weight, unsigned int index);
         unsigned int getWeight(unsigned int index);
 
-        void setWeights(unsigned int newWeights[MAX_WEIGHT_COUNT]);
+        void setWeights(unsigned int newWeights[TOTAL_WEIGHTS]);
         unsigned int *getWeights();
         
     private:
@@ -33,12 +33,12 @@ class Answer {
 class Question {
     public:
         Question();
-        Question(std::string prompt, Answer answers[MAX_ANSWER_COUNT]);
+        Question(std::string prompt, Answer answers[TOTAL_ANSWERS]);
 
         void setPrompt(std::string newPrompt);
         std::string getPrompt();
 
-        void setAnswers(Answer newAnswers[MAX_ANSWER_COUNT]);
+        void setAnswers(Answer newAnswers[TOTAL_ANSWERS]);
         Answer *getAnswers();
 
         Answer *ask();
@@ -46,7 +46,7 @@ class Question {
 
     private:
         std::string _prompt;
-        Answer _answers[MAX_ANSWER_COUNT];
+        Answer _answers[TOTAL_ANSWERS];
 };
 
 #endif // SURVEY_H

@@ -9,7 +9,7 @@
 Question::Question() {};
 
 // Constructor for Question class instances.
-Question::Question(std::string prompt, Answer answers[MAX_ANSWER_COUNT]) {
+Question::Question(std::string prompt, Answer answers[TOTAL_ANSWERS]) {
     _prompt = prompt;
     
     // Unfortunately, C++ does not allow you to overwrite array contents

@@ -8,7 +8,7 @@
 Answer::Answer() {};
 
 // Constructor for Answer class instances.
-Answer::Answer(std::string text, unsigned int weights[MAX_ANSWER_COUNT]) {
+Answer::Answer(std::string text, unsigned int weights[TOTAL_ANSWERS]) {
     _text = text;
     
     // Unfortunately, C++ does not allow you to overwrite array contents
@@ -33,7 +33,7 @@ std::string Answer::getText() {
 
 // Sets the value of an individual weight for an Answer class instance.
 void Answer::setWeight(unsigned int weight, unsigned int index) {
-    if (index >= MAX_WEIGHT_COUNT || index < 0) {
+    if (index >= TOTAL_WEIGHTS || index < 0) {
         throw std::invalid_argument("Index is out of bounds.");
     }
 
@@ -41,7 +41,7 @@ void Answer::setWeight(unsigned int weight, unsigned int index) {
 };
 
 // Sets the weights for an Answer class instance.
-void Answer::setWeights(unsigned int newWeights[MAX_WEIGHT_COUNT]) {
+void Answer::setWeights(unsigned int newWeights[TOTAL_WEIGHTS]) {
     unsigned int index = 0;
     unsigned int end = sizeof(_weights) / sizeof(_weights[0]);
 
@@ -52,7 +52,7 @@ void Answer::setWeights(unsigned int newWeights[MAX_WEIGHT_COUNT]) {
 
 // Gets the value of an individual weight for an Answer class instance.
 unsigned int Answer::getWeight(unsigned int index) {
-    if (index >= MAX_WEIGHT_COUNT || index < 0) {
+    if (index >= TOTAL_WEIGHTS || index < 0) {
         throw std::invalid_argument("Index is out of bounds.");
     }
     
