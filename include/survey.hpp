@@ -11,13 +11,6 @@
 #define MAX_ANSWER_COUNT 4
 #define MAX_WEIGHT_COUNT 4
 
-enum Party : unsigned int {
-    Blues,
-    Greens,
-    Yellows,
-    Reds
-};
-
 class Answer {
     public:
         Answer();
@@ -25,6 +18,9 @@ class Answer {
 
         void setText(std::string newText);
         std::string getText();
+
+        void setWeight(unsigned int weight, unsigned int index);
+        unsigned int getWeight(unsigned int index);
 
         void setWeights(unsigned int newWeights[MAX_WEIGHT_COUNT]);
         unsigned int *getWeights();
@@ -46,7 +42,7 @@ class Question {
         Answer *getAnswers();
 
         Answer *ask();
-        unsigned int askPosition();
+        unsigned int askIndex();
 
     private:
         std::string _prompt;
