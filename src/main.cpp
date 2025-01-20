@@ -5,6 +5,46 @@
 #include <string>
 #include "survey.hpp"
 
+// Asks all of the questions, then stores the selected answers and their cumulative weights in buffers.
+void ask_questions(Question *questions, Answer *selected_answers[TOTAL_ANSWERS], unsigned int *selected_weights) {
+    for (unsigned int index = 0; index < TOTAL_QUESTIONS; index++) {
+        Answer *answer = questions[index].ask();
+
+        // Add the answers and combined weights to arrays for the prediction.
+        selected_answers[index] = answer;
+
+        for (unsigned int affiliation = 0; affiliation < TOTAL_WEIGHTS; affiliation++) {
+            selected_weights[affiliation] += answer -> getWeight(affiliation);
+        }
+    };
+}
+
+// Predicts the political party of the user and displays the results.
+// TODO: Find a way to print predictions without hardcoding party values.
+void display_weights(unsigned int *weights) {
+    float cumulative_weight = 0;
+
+    for (unsigned int index = 0; index < TOTAL_WEIGHTS; index++) {
+        cumulative_weight += weights[index];
+    }
+
+    std::cout << "PREDICTION: Here are your chances of being in each political party:\n"      << std::endl;
+    std::cout << "Blue Party: "   << (weights[0] / cumulative_weight) * 100 << "%  " << std::endl;
+    std::cout << "Green Party: "  << (weights[1] / cumulative_weight) * 100 << "%  " << std::endl;
+    std::cout << "Yellow Party: " << (weights[2] / cumulative_weight) * 100 << "%  " << std::endl;
+    std::cout << "Red Party: "    << (weights[3] / cumulative_weight) * 100 << "%\n" << std::endl;
+}
+
+// Prompts the user for their political affiliation and updates weights accordingly.
+void update_weights(unsigned int affiliation, Answer *answers[TOTAL_ANSWERS]) {
+    for (unsigned int index = 0; index < TOTAL_QUESTIONS; index++) {
+        answers[index] -> setWeight(
+            answers[index] -> getWeight(affiliation) + 1, 
+            affiliation
+        );
+    }
+}
+
 int main(void) {
     // All default questions asked to the user apart from the political party affiliation question.
     Question questions[TOTAL_QUESTIONS] = {
@@ -46,44 +86,16 @@ int main(void) {
         }
     );
 
-    // Asking the user the above questions and recording results.
+    // Asking questions, storing results, making predictions, and updating weights according to user affiliation.
     Answer *selected_answers[TOTAL_QUESTIONS];
     unsigned int selected_weights[TOTAL_WEIGHTS] = {0, 0, 0, 0};
 
-    for (unsigned int index = 0; index < TOTAL_QUESTIONS; index++) {
-        Answer *answer = questions[index].ask();
-
-        // Add the answers and combined weights to arrays for the prediction.
-        selected_answers[index] = answer;
-
-        for (unsigned int affiliation = 0; affiliation < TOTAL_WEIGHTS; affiliation++) {
-            selected_weights[affiliation] += answer -> getWeight(affiliation);
-        }
-    };
-
-    // Predicts the political party of the user.
-    // TODO: Find a way to print predictions without hardcoding party values.
-    float cumulative_weight = 0;
-
-    for (unsigned int index = 0; index < TOTAL_WEIGHTS; index++) {
-        cumulative_weight += selected_weights[index];
-    }
-
-    std::cout << "PREDICTION: Here are your chances of being in each political party:\n"      << std::endl;
-    std::cout << "Blue Party: "   << (selected_weights[0] / cumulative_weight) * 100 << "%  " << std::endl;
-    std::cout << "Green Party: "  << (selected_weights[1] / cumulative_weight) * 100 << "%  " << std::endl;
-    std::cout << "Yellow Party: " << (selected_weights[2] / cumulative_weight) * 100 << "%  " << std::endl;
-    std::cout << "Red Party: "    << (selected_weights[3] / cumulative_weight) * 100 << "%\n" << std::endl;
-
-    // Prompts the user for their political affiliation and updates weights accordingly.
-    unsigned int affiliation = affiliation_question.askIndex();
-
-    for (unsigned int index = 0; index < TOTAL_QUESTIONS; index++) {
-        selected_answers[index] -> setWeight(
-            selected_answers[index] -> getWeight(affiliation) + 1, 
-            affiliation
-        );
-    }
+    ask_questions(questions, selected_answers, selected_weights);
+    display_weights(selected_weights);
+    update_weights(
+        affiliation_question.askIndex(), 
+        selected_answers
+    );
 
     // TODO: Export the results to a file.
     std::cout << "Thank you for your cooperation!" << std::endl;
