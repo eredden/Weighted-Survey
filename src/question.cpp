@@ -5,10 +5,8 @@
 #include <string>
 #include "survey.hpp"
 
-// Default constructor for Question class instances.
 Question::Question() {};
 
-// Constructor for Question class instances.
 Question::Question(std::string prompt, Answer answers[TOTAL_ANSWERS]) {
     _prompt = prompt;
     
@@ -22,18 +20,15 @@ Question::Question(std::string prompt, Answer answers[TOTAL_ANSWERS]) {
     }
 };
 
-// Sets the prompt attribute for a Question class instance.
 void Question::setPrompt(std::string newPrompt){
     _prompt = newPrompt;
 };
 
-// Gets the text attribute from a Question class instance.
 std::string Question::getPrompt(){
     return _prompt;
 };
 
-// Sets the answers for a Question class instance.
-void Question::setAnswers(Answer newAnswers[4]){
+void Question::setAnswers(Answer newAnswers[TOTAL_ANSWERS]){
     unsigned int index = 0;
     unsigned int end = sizeof(_answers) / sizeof(_answers[0]);
 
@@ -42,12 +37,10 @@ void Question::setAnswers(Answer newAnswers[4]){
     }
 };
 
-// Gets the answers from a Question class instance.
 Answer *Question::getAnswers(){
     return _answers;
 };
 
-// Prompts the end user with the question and returns the answer.
 Answer *Question::ask(){
     unsigned int index = -1;
 
@@ -75,7 +68,6 @@ Answer *Question::ask(){
     return &_answers[index - 1];
 };
 
-// Prompts the end user with the question and returns the answers index.
 unsigned int Question::askIndex(){
     unsigned int index = -1;
 

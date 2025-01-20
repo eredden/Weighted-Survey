@@ -4,10 +4,8 @@
 #include <string>
 #include "survey.hpp"
 
-// Default constructor for Answer class instances.
 Answer::Answer() {};
 
-// Constructor for Answer class instances.
 Answer::Answer(std::string text, unsigned int weights[TOTAL_ANSWERS]) {
     _text = text;
     
@@ -21,17 +19,14 @@ Answer::Answer(std::string text, unsigned int weights[TOTAL_ANSWERS]) {
     }
 };
 
-// Sets the text attribute for an Answer class instance.
 void Answer::setText(std::string newText) {
     _text = newText;
 };
 
-// Gets the text from an Answer class instance.
 std::string Answer::getText() {
     return _text;
 };
 
-// Sets the value of an individual weight for an Answer class instance.
 void Answer::setWeight(unsigned int weight, unsigned int index) {
     if (index >= TOTAL_WEIGHTS || index < 0) {
         throw std::invalid_argument("Index is out of bounds.");
@@ -40,7 +35,6 @@ void Answer::setWeight(unsigned int weight, unsigned int index) {
     _weights[index] = weight;
 };
 
-// Sets the weights for an Answer class instance.
 void Answer::setWeights(unsigned int newWeights[TOTAL_WEIGHTS]) {
     unsigned int index = 0;
     unsigned int end = sizeof(_weights) / sizeof(_weights[0]);
@@ -50,7 +44,6 @@ void Answer::setWeights(unsigned int newWeights[TOTAL_WEIGHTS]) {
     }
 };
 
-// Gets the value of an individual weight for an Answer class instance.
 unsigned int Answer::getWeight(unsigned int index) {
     if (index >= TOTAL_WEIGHTS || index < 0) {
         throw std::invalid_argument("Index is out of bounds.");
@@ -59,7 +52,6 @@ unsigned int Answer::getWeight(unsigned int index) {
     return _weights[index];
 };
 
-// Gets the weights from an Answer class instance.
 unsigned int *Answer::getWeights(){
     return _weights;
 };
