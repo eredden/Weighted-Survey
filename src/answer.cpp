@@ -32,7 +32,7 @@ std::string Answer::getText() {
 };
 
 // Sets the weights for an Answer class instance.
-void Answer::setWeights(unsigned int newWeights[4]) {
+void Answer::setWeights(unsigned int newWeights[MAX_WEIGHT_COUNT]) {
     unsigned int index = 0;
     unsigned int end = sizeof(_weights)/sizeof(_weights[0]);
 

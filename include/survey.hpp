@@ -26,7 +26,7 @@ class Answer {
         void setText(std::string newText);
         std::string getText();
 
-        void setWeights(unsigned int newWeights[4]);
+        void setWeights(unsigned int newWeights[MAX_WEIGHT_COUNT]);
         unsigned int *getWeights();
         
     private:
@@ -42,10 +42,11 @@ class Question {
         void setPrompt(std::string newPrompt);
         std::string getPrompt();
 
-        void setAnswers(Answer newAnswers[4]);
+        void setAnswers(Answer newAnswers[MAX_ANSWER_COUNT]);
         Answer *getAnswers();
 
         Answer *ask();
+        unsigned int askPosition();
 
     private:
         std::string _prompt;

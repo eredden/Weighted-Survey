@@ -47,7 +47,7 @@ Answer *Question::getAnswers(){
     return _answers;
 };
 
-// Prompts the end user with the question.
+// Prompts the end user with the question and returns the answer.
 Answer *Question::ask(){
     unsigned int index = -1;
 
@@ -73,4 +73,30 @@ Answer *Question::ask(){
     // Returning this answer by value would cause weight values to
     // only be modified by the copy of the original Answer instance.
     return &_answers[index - 1];
+};
+
+// Prompts the end user with the question and returns the answers index.
+unsigned int Question::askPosition(){
+    unsigned int index = -1;
+
+    std::cout << "QUESTION: " << _prompt << "\n\n";
+    std::cout << "1. " << _answers[0].getText() << "\n";
+    std::cout << "2. " << _answers[1].getText() << "\n";
+    std::cout << "3. " << _answers[2].getText() << "\n";
+    std::cout << "4. " << _answers[3].getText() << "\n\n";
+
+    std::cout << "Enter an answer (1-4): ";
+
+    // Validate that the answer is not blank, and that it is between 1 and 4.
+    while(!(std::cin >> index) || index > 4 || 1 > index) {
+        std::cout << "Enter an answer (1-4): ";
+
+        // Ignore invalid inputs to prevent catastrophic failure.
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    };
+
+    std::cout << "You selected answer " << index << ".\n\n";
+
+    return index - 1;
 };
