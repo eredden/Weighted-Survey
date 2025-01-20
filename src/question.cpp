@@ -15,7 +15,7 @@ Question::Question(std::string prompt, Answer answers[MAX_ANSWER_COUNT]) {
     // Unfortunately, C++ does not allow you to overwrite array contents
     // simply by writing _array = array. That would be too easy!
     unsigned int index = 0;
-    unsigned int end = sizeof(_answers)/sizeof(_answers[0]);
+    unsigned int end = sizeof(_answers) / sizeof(_answers[0]);
 
     for (index; index < end; index++) {
         _answers[index] = answers[index];
@@ -35,7 +35,7 @@ std::string Question::getPrompt(){
 // Sets the answers for a Question class instance.
 void Question::setAnswers(Answer newAnswers[4]){
     unsigned int index = 0;
-    unsigned int end = sizeof(_answers)/sizeof(_answers[0]);
+    unsigned int end = sizeof(_answers) / sizeof(_answers[0]);
 
     for (index; index < end; index++) {
         _answers[index] = newAnswers[index];
@@ -76,7 +76,7 @@ Answer *Question::ask(){
 };
 
 // Prompts the end user with the question and returns the answers index.
-unsigned int Question::askPosition(){
+unsigned int Question::askIndex(){
     unsigned int index = -1;
 
     std::cout << "QUESTION: " << _prompt << "\n\n";

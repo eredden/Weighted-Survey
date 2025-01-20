@@ -1,14 +1,12 @@
 // main.cpp - The entry point for the survey program.
 
+#include <fstream>
 #include <iostream>
 #include <string>
 #include "survey.hpp"
 
 int main(void) {
-    // TODO: Create data file that stores questions and answers
-    // and import the data into this program when loaded.
-
-    // All questions asked to the user apart from the political party affiliation question.
+    // All default questions asked to the user apart from the political party affiliation question.
     Question questions[TOTAL_QUESTIONS] = {
         Question("What should the government do to help the poor?",
             (Answer[MAX_ANSWER_COUNT]) {
@@ -50,13 +48,22 @@ int main(void) {
     // Ask the user each question and store the selected answers.
     Answer *selected_answers[TOTAL_QUESTIONS];
 
-    for (int index = 0; index < TOTAL_QUESTIONS; index++) {
+    for (unsigned int index = 0; index < TOTAL_QUESTIONS; index++) {
         Answer *answer = questions[index].ask();
 
         selected_answers[index] = answer;
     };
 
     // TODO: Create a function that predicts what political party the user is in.
-    // TODO: Prompt the user for their political party and adjust the weights of the questions.
+    // Prompt the user for their political affiliation and update weights accordingly.
+    unsigned int affiliation = affiliation_question.askIndex();
+
+    for (unsigned int index = 0; index < TOTAL_QUESTIONS; index++) {
+        selected_answers[index] -> setWeight(
+            selected_answers[index] -> getWeight(affiliation) + 1, 
+            affiliation
+        );
+    }
+
     // TODO: Export the results to a file.
 }
