@@ -22,8 +22,43 @@ cmake -G "MinGW Makefiles" ..
 make 
 ```
 
-```bash
-# Running the executable built by CMake.
+### Usage
 
-./main.exe
+After compiling and linking the C++ code into an executable, execute it in the terminal and follow the prompts. You will be prompted with three multiple choice political questions to gauge your political affiliation.
+
 ```
+QUESTION: What should the government do to help the poor?
+
+1. Make it easier to apply for assistance.
+2. Allow parents to have school choice.
+3. Create welfare for work programs.
+4. The government should not interfere.
+
+Enter an answer (1-4): 
+```
+
+Once you have completed all three questions, the program will show your political affiliation predictions. Since the weights are not changed until you submit your true political affiliation, all parties will have an equal chance. This changes with subsequent uses of the program.
+
+```
+PREDICTION: Here are your chances of being in each political party:
+
+Blue Party: 25%
+Green Party: 25%
+Yellow Party: 25%
+Red Party: 25%
+```
+
+You will finally be prompted with a question that asks for your political affiliation. This answer will adjust the weights of each of the answers that you selected before, making them weighted more heavily towards the party you selected. The answers you did not select will not be affected at all.
+
+```
+QUESTION: What political party do you affiliate with?
+
+1. The Blue Party.
+2. The Green Party.
+3. The Yellow Party.
+4. The Red Party.
+
+Enter an answer (1-4): 
+```
+
+Re-running the program will produce more accurate predictions as the weights become better.
