@@ -1,5 +1,6 @@
 // question.cpp - Functions for the Question class.
 
+#include <fstream>
 #include <iostream>
 #include <limits>
 #include <string>
@@ -73,3 +74,32 @@ Answer* Question::ask() {
 
     return &_answers[index];
 }
+
+void Question::serialize(std::ofstream &out) const {
+    size_t prompt_length = MAX_STRING_LENGTH;
+    out.write(reinterpret_cast<const char*>(&prompt_length), sizeof(prompt_length));
+    out.write(_prompt.c_str(), prompt_length);
+
+    for (int i = 0; i < TOTAL_ANSWERS; ++i) {
+        size_t answer_length = MAX_STRING_LENGTH;
+        out.write(reinterpret_cast<const char*>(&answer_length), sizeof(answer_length));
+        out.write(_answers[i].getText().c_str(), answer_length);
+    }
+}
+
+void Question::deserialize(std::ifstream &in) {
+    size_t prompt_length;
+    in.read(reinterpret_cast<char*>(&prompt_length), sizeof(prompt_length));
+    _prompt.resize(prompt_length);
+    in.read(&_prompt[0], prompt_length);
+
+    for (int i = 0; i < TOTAL_ANSWERS; ++i) {
+        size_t answer_length;
+        in.read(reinterpret_cast<char*>(&answer_length), sizeof(answer_length));
+        std::string answer_text(answer_length, '\0');
+        in.read(&answer_text[0], answer_length);
+        _answers[i].setText(answer_text);
+    }
+}
+
+// ...existing code...

@@ -8,8 +8,10 @@
 
 // Note that TOTAL_QUESTIONS excludes the last question about political affiliation.
 #define TOTAL_QUESTIONS 3
-#define TOTAL_ANSWERS   4
-#define TOTAL_WEIGHTS   4
+#define TOTAL_ANSWERS 4
+#define TOTAL_WEIGHTS 4
+#define MAX_STRING_LENGTH 64
+#define QUESTION_FILE "question.dat"
 
 class Answer {
     public:
@@ -23,7 +25,7 @@ class Answer {
         void setText(std::string text);
 
         // Gets the text from an Answer class instance.
-        std::string getText();
+        std::string getText() const;
 
         // Sets the value of an individual weight for an Answer class instance.
         void setWeight(unsigned int weight, unsigned int index);
@@ -67,6 +69,12 @@ class Question {
 
         // Prompts the end user with the question and returns the answers index.
         unsigned int askIndex();
+
+        // Serializes the Question instance to a binary file.
+        void serialize(std::ofstream &out) const;
+
+        // Deserializes the Question instance from a binary file.
+        void deserialize(std::ifstream &in);
 
     private:
         std::string _prompt;

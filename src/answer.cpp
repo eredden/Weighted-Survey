@@ -19,11 +19,11 @@ Answer::Answer(std::string text, unsigned int weights[TOTAL_ANSWERS]) {
     }
 };
 
-void Answer::setText(std::string text) {
-    _text = text;
+void Answer::setText(std::string newText) {
+    _text = newText;
 };
 
-std::string Answer::getText() {
+std::string Answer::getText() const {
     return _text;
 };
 
@@ -35,12 +35,12 @@ void Answer::setWeight(unsigned int weight, unsigned int index) {
     _weights[index] = weight;
 };
 
-void Answer::setWeights(unsigned int weights[TOTAL_WEIGHTS]) {
+void Answer::setWeights(unsigned int newWeights[TOTAL_WEIGHTS]) {
     unsigned int index = 0;
     unsigned int end = sizeof(_weights) / sizeof(_weights[0]);
 
     for (index; index < end; index++) {
-        _weights[index] = weights[index];
+        _weights[index] = newWeights[index];
     }
 };
 
