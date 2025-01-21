@@ -20,20 +20,20 @@ Question::Question(std::string prompt, Answer answers[TOTAL_ANSWERS]) {
     }
 };
 
-void Question::setPrompt(std::string newPrompt){
-    _prompt = newPrompt;
+void Question::setPrompt(std::string prompt){
+    _prompt = prompt;
 };
 
 std::string Question::getPrompt(){
     return _prompt;
 };
 
-void Question::setAnswers(Answer newAnswers[TOTAL_ANSWERS]){
+void Question::setAnswers(Answer answers[TOTAL_ANSWERS]){
     unsigned int index = 0;
     unsigned int end = sizeof(_answers) / sizeof(_answers[0]);
 
     for (index; index < end; index++) {
-        _answers[index] = newAnswers[index];
+        _answers[index] = answers[index];
     }
 };
 

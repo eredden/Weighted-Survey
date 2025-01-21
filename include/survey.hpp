@@ -20,7 +20,7 @@ class Answer {
         Answer(std::string text, unsigned int weights[TOTAL_ANSWERS]);
 
         // Sets the text attribute for an Answer class instance.
-        void setText(std::string newText);
+        void setText(std::string text);
 
         // Gets the text from an Answer class instance.
         std::string getText();
@@ -32,7 +32,7 @@ class Answer {
         unsigned int getWeight(unsigned int index);
 
         // Sets the weights for an Answer class instance.
-        void setWeights(unsigned int newWeights[TOTAL_WEIGHTS]);
+        void setWeights(unsigned int weights[TOTAL_WEIGHTS]);
 
         // Gets the weights from an Answer class instance.
         unsigned int *getWeights();
@@ -51,13 +51,13 @@ class Question {
         Question(std::string prompt, Answer answers[TOTAL_ANSWERS]);
 
         // Sets the prompt attribute for a Question class instance.
-        void setPrompt(std::string newPrompt);
+        void setPrompt(std::string prompt);
 
         // Gets the text attribute from a Question class instance.
         std::string getPrompt();
 
         // Sets the answers for a Question class instance.
-        void setAnswers(Answer newAnswers[TOTAL_ANSWERS]);
+        void setAnswers(Answer answers[TOTAL_ANSWERS]);
 
         // Gets the answers from a Question class instance.
         Answer *getAnswers();
