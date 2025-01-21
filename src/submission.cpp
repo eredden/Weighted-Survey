@@ -1,6 +1,16 @@
 // submission.cpp - The combined code from the source and header files that I made for this project.
-// This code can be compiled with g++ into an executable that gives a political survey.
-// This code is not included in the CMakeLists.txt file for obvious reasons.
+
+/*
+YOU NEED TO RUN THIS PROGRAM MULTIPLE TIMES TO GET ADJUSTED PREDICTIONS.
+BY DEFAULT, ALL PARTIES HAVE A 25% CHANCE OF BEING ALIGNED WITH YOU.
+THE DEFAULT WEIGHTS ARE THE SAME FOR ALL PARTIES AND ANSWERS.
+
+This code can be compiled with g++ into an executable that gives a political survey.
+Questions, answers, and weights are serialized and written to questions.dat.
+
+If you would like to see the full project and documentation:
+https://github.com/eredden/Weighted-Survey
+*/
 
 #include <cstring>
 #include <filesystem>
