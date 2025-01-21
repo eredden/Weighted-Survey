@@ -1,29 +1,28 @@
 // answer.cpp - Functions for the Answer class.
 
 #include <iostream>
-#include <string>
+#include <cstring>
 #include "survey.hpp"
 
-Answer::Answer() {};
+Answer::Answer() {
+    std::memset(_text, 0, MAX_STRING_LENGTH);
+};
 
-Answer::Answer(std::string text, unsigned int weights[TOTAL_ANSWERS]) {
-    _text = text;
+Answer::Answer(const char* text, unsigned int weights[TOTAL_ANSWERS]) {
+    std::strncpy(_text, text, MAX_STRING_LENGTH - 1);
+    _text[MAX_STRING_LENGTH - 1] = '\0'; // Ensure null-termination.
     
-    // Unfortunately, C++ does not allow you to overwrite array contents
-    // simply by writing _array = array. That would be too easy!
-    unsigned int index = 0;
-    unsigned int end = sizeof(_weights) / sizeof(_weights[0]);
-
-    for (index; index < end; index++) {
-        _weights[index] = weights[index];
+    for (int i = 0; i < TOTAL_WEIGHTS; ++i) {
+        _weights[i] = weights[i];
     }
 };
 
-void Answer::setText(std::string newText) {
-    _text = newText;
+void Answer::setText(const char* newText) {
+    std::strncpy(_text, newText, MAX_STRING_LENGTH - 1);
+    _text[MAX_STRING_LENGTH - 1] = '\0'; // Ensure null-termination.
 };
 
-std::string Answer::getText() const {
+const char* Answer::getText() const {
     return _text;
 };
 
@@ -36,11 +35,8 @@ void Answer::setWeight(unsigned int weight, unsigned int index) {
 };
 
 void Answer::setWeights(unsigned int newWeights[TOTAL_WEIGHTS]) {
-    unsigned int index = 0;
-    unsigned int end = sizeof(_weights) / sizeof(_weights[0]);
-
-    for (index; index < end; index++) {
-        _weights[index] = newWeights[index];
+    for (int i = 0; i < TOTAL_WEIGHTS; ++i) {
+        _weights[i] = newWeights[i];
     }
 };
 
@@ -52,6 +48,16 @@ unsigned int Answer::getWeight(unsigned int index) {
     return _weights[index];
 };
 
-unsigned int *Answer::getWeights(){
+unsigned int *Answer::getWeights() {
     return _weights;
+};
+
+void Answer::serialize(std::ostream &out) {
+    out.write(_text, MAX_STRING_LENGTH);
+    out.write((char *)_weights, TOTAL_WEIGHTS * sizeof(unsigned int));
+};
+
+void Answer::deserialize(std::istream &in) {
+    in.read(_text, MAX_STRING_LENGTH);
+    in.read((char *)_weights, TOTAL_WEIGHTS * sizeof(unsigned int));
 };

@@ -1,7 +1,6 @@
 // survey.hpp - Defines questions, answers, and functions for working with them.
 
 #include <iostream>
-#include <string>
 
 #ifndef SURVEY_H
 #define SURVEY_H
@@ -19,13 +18,13 @@ class Answer {
         Answer();
 
         // Constructor for Answer class instances.
-        Answer(std::string text, unsigned int weights[TOTAL_ANSWERS]);
+        Answer(const char* text, unsigned int weights[TOTAL_ANSWERS]);
 
         // Sets the text attribute for an Answer class instance.
-        void setText(std::string text);
+        void setText(const char* text);
 
         // Gets the text from an Answer class instance.
-        std::string getText() const;
+        const char* getText() const;
 
         // Sets the value of an individual weight for an Answer class instance.
         void setWeight(unsigned int weight, unsigned int index);
@@ -38,9 +37,15 @@ class Answer {
 
         // Gets the weights from an Answer class instance.
         unsigned int *getWeights();
+
+        // Serializes the Answer instance to a binary file.
+        void serialize(std::ostream &out);
+
+        // Deserializes the Answer instance from a binary file.
+        void deserialize(std::istream &in);
         
     private:
-        std::string  _text;
+        char _text[MAX_STRING_LENGTH];
         unsigned int _weights[4];
 };
 
@@ -50,13 +55,13 @@ class Question {
         Question();
 
         // Constructor for Question class instances.
-        Question(std::string prompt, Answer answers[TOTAL_ANSWERS]);
+        Question(const char* prompt, Answer answers[TOTAL_ANSWERS]);
 
         // Sets the prompt attribute for a Question class instance.
-        void setPrompt(std::string prompt);
+        void setPrompt(const char* prompt);
 
         // Gets the text attribute from a Question class instance.
-        std::string getPrompt();
+        const char* getPrompt() const;
 
         // Sets the answers for a Question class instance.
         void setAnswers(Answer answers[TOTAL_ANSWERS]);
@@ -71,13 +76,13 @@ class Question {
         unsigned int askIndex();
 
         // Serializes the Question instance to a binary file.
-        void serialize(std::ofstream &out) const;
+        void serialize(std::ostream &out);
 
         // Deserializes the Question instance from a binary file.
-        void deserialize(std::ifstream &in);
+        void deserialize(std::istream &in);
 
     private:
-        std::string _prompt;
+        char _prompt[MAX_STRING_LENGTH];
         Answer _answers[TOTAL_ANSWERS];
 };
 
