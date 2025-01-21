@@ -1,10 +1,10 @@
-## AI Survey Program
+## Weighted Survey Program
 
 ### Introduction
 
 This project was created for the [Computer Science 311 course](https://study.com/academy/course/computer-science-311-artificial-intelligence.html) on [Study.com](https://study.com).
 
-This program surveys you on three multiple choice questions about your political beliefs, with each question having four answers. These answers have no weights by default in favor of any political party. After answering those questions, you will be shown what the program predicted as your political affiliation. You will then be prompted for your affiliation with one of the four political parties. The program will adjust the weights of the answers based on your response. The hope is that the program can evenually predict your political affiliation based on the answers you provide.
+This program surveys you on three multiple choice questions about your political beliefs, with each question having four answers. These answers have no weights by default in favor of any political party. After answering those questions, you will be shown what the program predicted as your political affiliation. You will then be prompted for your affiliation with one of the four political parties. The program will adjust the weights of the answers based on your response. The hope is that the program can predict your political affiliation based on the answers you provide.
 
 ### Setup
 
