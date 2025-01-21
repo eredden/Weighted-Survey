@@ -6,7 +6,7 @@
 #define SURVEY_H
 
 // Note that TOTAL_QUESTIONS excludes the last question about political affiliation.
-#define TOTAL_QUESTIONS 3
+#define TOTAL_QUESTIONS 8
 #define TOTAL_ANSWERS 4
 #define TOTAL_WEIGHTS 4
 #define MAX_STRING_LENGTH 64

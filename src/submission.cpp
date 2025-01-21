@@ -13,7 +13,7 @@
 #define SURVEY_H
 
 // Note that TOTAL_QUESTIONS excludes the last question about political affiliation.
-#define TOTAL_QUESTIONS 3
+#define TOTAL_QUESTIONS 8
 #define TOTAL_ANSWERS 4
 #define TOTAL_WEIGHTS 4
 #define MAX_STRING_LENGTH 64
@@ -334,6 +334,46 @@ int main(void) {
                 Answer("Enforce a maximum calorie limit for all people.", (unsigned int[TOTAL_WEIGHTS]) {1, 1, 1, 1}),
                 Answer("Encourage citizens to exercise and eat healthy.", (unsigned int[TOTAL_WEIGHTS]) {1, 1, 1, 1}),
                 Answer("The government should not interfere.",            (unsigned int[TOTAL_WEIGHTS]) {1, 1, 1, 1}),
+            }
+        ),
+        Question("What is your stance on government intervention in the economy?",
+            (Answer[TOTAL_ANSWERS]) {
+                Answer("They should do it far more often.",                      (unsigned int[TOTAL_WEIGHTS]) {1, 1, 1, 1}),
+                Answer("Only if it aligns with the goals of my party.",          (unsigned int[TOTAL_WEIGHTS]) {1, 1, 1, 1}),
+                Answer("The government should only intervene with their words.", (unsigned int[TOTAL_WEIGHTS]) {1, 1, 1, 1}),
+                Answer("The government should not interfere.",                   (unsigned int[TOTAL_WEIGHTS]) {1, 1, 1, 1}),
+            }
+        ),
+        Question("Should healthcare be a universal right?",
+            (Answer[TOTAL_ANSWERS]) {
+                Answer("Yes, absolutely! Think of the children!",            (unsigned int[TOTAL_WEIGHTS]) {1, 1, 1, 1}),
+                Answer("No, because it will make people less risk-adverse.", (unsigned int[TOTAL_WEIGHTS]) {1, 1, 1, 1}),
+                Answer("No, because some people do not deserve it.",         (unsigned int[TOTAL_WEIGHTS]) {1, 1, 1, 1}),
+                Answer("The government should not interfere.",               (unsigned int[TOTAL_WEIGHTS]) {1, 1, 1, 1}),
+            }
+        ),
+        Question("What is your opinion on climate change action?",
+            (Answer[TOTAL_ANSWERS]) {
+                Answer("It is very good! Think of the children again!", (unsigned int[TOTAL_WEIGHTS]) {1, 1, 1, 1}),
+                Answer("It's a government psyop to limit our rights.",  (unsigned int[TOTAL_WEIGHTS]) {1, 1, 1, 1}),
+                Answer("I do not particularly care for it.",            (unsigned int[TOTAL_WEIGHTS]) {1, 1, 1, 1}),
+                Answer("The government should not interfere.",          (unsigned int[TOTAL_WEIGHTS]) {1, 1, 1, 1}),
+            }
+        ),
+        Question("Should taxes be raised for the wealthiest citizens?",
+            (Answer[TOTAL_ANSWERS]) {
+                Answer("Yes, and taxes for those in poverty should be lowered.",   (unsigned int[TOTAL_WEIGHTS]) {1, 1, 1, 1}),
+                Answer("Sure, along with everyone elses taxes.",                   (unsigned int[TOTAL_WEIGHTS]) {1, 1, 1, 1}),
+                Answer("The government should not have taxes in the first place.", (unsigned int[TOTAL_WEIGHTS]) {1, 1, 1, 1}),
+                Answer("The government should not interfere.",                     (unsigned int[TOTAL_WEIGHTS]) {1, 1, 1, 1}),
+            }
+        ),
+        Question("Do you support stricter gun control laws?",
+            (Answer[TOTAL_ANSWERS]) {
+                Answer("Yes, because it will keep our streets safe.",  (unsigned int[TOTAL_WEIGHTS]) {1, 1, 1, 1}),
+                Answer("No, because we cannot defend ourselves then!", (unsigned int[TOTAL_WEIGHTS]) {1, 1, 1, 1}),
+                Answer("Only background checks should be added.",      (unsigned int[TOTAL_WEIGHTS]) {1, 1, 1, 1}),
+                Answer("The government should not interfere.",         (unsigned int[TOTAL_WEIGHTS]) {1, 1, 1, 1}),
             }
         )
     };
