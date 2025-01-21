@@ -1,9 +1,42 @@
 // main.cpp - The entry point for the survey program.
 
+#include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <string>
 #include "survey.hpp"
+
+void read_questions(Question questions[TOTAL_QUESTIONS]) {
+    std::ifstream inFile(QUESTION_FILE, std::ios::binary);
+
+    if (inFile.is_open()) {
+        for (unsigned int index = 0; index < TOTAL_QUESTIONS; index++) {
+            questions[index].deserialize(inFile);
+        }
+
+        inFile.close();
+    } 
+    
+    else {
+        std::cerr << "Failed to open file for reading." << std::endl;
+    }
+}
+
+void write_questions(Question questions[TOTAL_QUESTIONS]) {
+   std::ofstream outFile(QUESTION_FILE, std::ios::binary);
+
+    if (outFile.is_open()) {
+        for (unsigned int index = 0; index < TOTAL_QUESTIONS; index++) {
+            questions[index].serialize(outFile);
+        }
+
+        outFile.close();
+    } 
+    
+    else {
+        std::cerr << "Failed to open file for writing." << std::endl;
+    }
+}
 
 // Asks all of the questions, then stores the selected answers and their cumulative weights in buffers.
 void ask_questions(Question *questions, Answer *selected_answers[TOTAL_ANSWERS], unsigned int *selected_weights) {
@@ -46,7 +79,7 @@ void update_weights(unsigned int affiliation, Answer *answers[TOTAL_ANSWERS]) {
 }
 
 int main(void) {
-    // All default questions asked to the user apart from the political party affiliation question.
+    // All default questions and weights.
     Question questions[TOTAL_QUESTIONS] = {
         Question("What should the government do to help the poor?",
             (Answer[TOTAL_ANSWERS]) {
@@ -74,6 +107,11 @@ int main(void) {
         )
     };
 
+    // Get questions from the questions file if it already exists.
+    if (std::filesystem::exists(QUESTION_FILE)) {
+        read_questions(questions);
+    }
+
     // This question is used to determine how the weights are changed for the previous questions.
     Question affiliation_question = Question(
         "What political party do you affiliate with?",
@@ -97,7 +135,9 @@ int main(void) {
         selected_answers
     );
 
-    // TODO: Export the results to a file.
+    // Writing the updated questions to the file.
+    write_questions(questions);
+
     std::cout << "Thank you for your cooperation!" << std::endl;
     std::cout << "Feel free to try again, as the results can only improve!" << std::endl;
 }
